@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: {{ .Values.app }}
+  name: nginx
+spec:
+  ports:
+  - port: {{ .Values.port }}
+    protocol: {{ .Values.protocol }}
+    targetPort: {{ .Values.port }}
+  selector:
+    package: {{ .Values.package }}
+  type: NodePort
+status:
+  loadBalancer: {}

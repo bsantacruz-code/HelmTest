@@ -1,0 +1,12 @@
+app: nginx
+package: helm-chart
+
+name: nginx-helm
+
+spec:
+  replicaCount: 2
+
+image: nginx:latest
+
+port: 80
+protocol: TCP

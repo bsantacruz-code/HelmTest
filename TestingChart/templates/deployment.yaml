@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: {{ .Values.app }}
+    package: {{ .Values.package }}
+  name: {{ .Values.name }}
+spec:
+  replicas: {{ .Values.spec.replicaCount}}
+  selector:
+    matchLabels:
+      package: {{ .Values.package }}
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: {{ .Values.app }}
+    spec:
+      containers:
+        - image: {{ .Values.image }}
+          name: nginx
+          resources: {}
+status: {}
