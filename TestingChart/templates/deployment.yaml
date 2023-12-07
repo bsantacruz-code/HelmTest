@@ -3,23 +3,24 @@ kind: Deployment
 metadata:
   creationTimestamp: null
   labels:
-    app: {{ .Values.app }}
-    package: {{ .Values.package }}
-  name: {{ .Values.name }}
+    app: { { .Values.app } }
+    package: { { .Values.package } }
+  name: { { .Values.name } }
 spec:
-  replicas: {{ .Values.spec.replicaCount}}
+  replicas: { { .Values.spec.replicaCount } }
   selector:
     matchLabels:
-      package: {{ .Values.package }}
+      package: { { .Values.package } }
   strategy: {}
   template:
     metadata:
       creationTimestamp: null
       labels:
-        app: {{ .Values.app }}
+        app: { { .Values.app } }
+        package: { { .Values.package } }
     spec:
       containers:
-        - image: {{ .Values.image }}
+        - image: { { .Values.image } }
           name: nginx
           resources: {}
 status: {}
