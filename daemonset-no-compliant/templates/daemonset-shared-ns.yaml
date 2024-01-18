@@ -1,0 +1,27 @@
+# This resource violates the policies "DaemonSets with containers running as root" and "DaemonSets with shared namespaces"
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: daemonset-shared-ns
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    matchLabels:
+      app: daemonset-shared-ns
+  template:
+    metadata:
+      labels:
+        app: daemonset-shared-ns
+    spec:
+      hostNetwork: true
+      hostPID: true
+      containers:
+        - name: busybox-container
+          image: busybox
+          command: ["sh", "-c", "while true; do sleep 3600; done"]
+          securityContext:
+            runAsNonRoot: false
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
