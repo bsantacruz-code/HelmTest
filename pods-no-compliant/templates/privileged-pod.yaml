@@ -1,0 +1,26 @@
+# This resource is not compliance for NET_RAW capability & Security Context Options
+apiVersion: v1
+kind: Pod
+metadata:
+  name: priv-pod
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: frontend
+spec:
+  containers:
+    - name: httpd
+      image: httpd:latest
+      resources:
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
+      ports:
+        - name: http
+          containerPort: {{ .Values.port }}
+          protocol: {{ .Values.protocol }}
+      securityContext:
+        privileged: true
+        allowPrivilegeEscalation: true
+        runAsUser: 0
+        capabilities:
+          add: ["NET_RAW"]

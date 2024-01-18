@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-rol
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: backend
+spec:
+  serviceAccountName: sa-rol
+  automountServiceAccountToken: false
+  containers:
+    - name: postgres
+      image: postgres:13.13-bullseye
+      resources:
+        limits:
+          memory: "128Mi"
+          cpu: "500m"

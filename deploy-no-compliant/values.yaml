@@ -1,0 +1,6 @@
+namespace: converge
+spec:
+  replicas: 2
+
+ports:
+  containerPort: 443
